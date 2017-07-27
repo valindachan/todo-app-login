@@ -6,38 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>To Do List</title>
     <link href="/style.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
   </head>
   <body>
     <div class="create">
       <h1>To Do List</h1>
       <form action="/createTodo/{{todo}}" method="post">
-        <p>Create a new todo</p>
-        <input type="text" name="todo" placeholder="I need to..." />
-        <button type="submit">Add Todo</button>
+        <p>I need to...</p>
+        <div class="create-todo-input">
+          <input type="text" name="todo" placeholder="Pick up birthday cake..." />
+          <button type="submit"><i class="fa fa-plus" aria-hidden="true"></i> Add Todo</button>
+        </div>
       </form>
     </div>
     <div class="pending">
-      <h3>Todos</h3>
+      <h2>Todos</h2>
       <ul>
         {{#incomplete}}
           <li>
             <form action="/markComplete/{{id}}" method="post">
-              <button type="submit">Mark as Complete</button> {{item}}
+              <button type="submit"><i class="fa fa-check" aria-hidden="true"></i></button> {{item}}
             </form>
           </li>
+        {{/incomplete}}
+        {{^incomplete}}
+          <p>Hooray! There's nothing here for you to do yet.</p>
         {{/incomplete}}
       </ul>
     </div>
     <div class="completed">
-      <h3>Complete</h3>
+      <h2>Complete</h2>
       <ul>
         {{#complete}}
           <li>
             <form action="/markIncomplete/{{id}}" method="post">
-              <button type="submit">Mark as incomplete</button> <del>{{item}}</del>
+              <button type="submit"><i class="fa fa-check" aria-hidden="true"></i></button> <del>{{item}}</del>
             </form>
           </li>
+        {{/complete}}
+        {{^complete}}
+          <p>You've either got some catching up to do or you can add a todo on top.</p>
         {{/complete}}
       </ul>
     </div>

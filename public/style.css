@@ -1,7 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Slabo+27px');
+
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #53565a;
   margin: 30px;
+  height: 100vh;
+  /*background: #ff9068;*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: #fd746c;
+  background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
+  background: linear-gradient(to right, #ff9068, #fd746c);
+}
+
+h1,
+h2 {
+  font-family: 'Slabo 27px', serif;
 }
 
 ul {
@@ -13,43 +27,67 @@ li {
   padding: 5px;
 }
 
+.create,
+.pending,
+.completed {
+  background: #fff;
+  opacity: .95;
+  padding: 30px;
+  margin: 20px;
+}
+
+.create-todo-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 100vh;
+}
+
 .create input {
   font-size: 1em;
-  padding: 15px;
-  width: 25em;
-  margin-right: -5px;
+  padding: 20px;
+  flex-grow: 2;
+  border: 1px solid #ccc;
+  /*border-top-left-radius: 15px;*/
+  /*border-bottom-left-radius: 15px;*/
 }
 
 .create button {
   background-color: #0faa1c;
   color: #fff;
+  padding: 20px;
   font-size: 1em;
-  border: 1px solid #0faa1c;
-  padding: 15px;
+  border: 0px solid #0faa1c;
   margin: 0;
-  width: 15em;
+  flex-grow: 1;
+  /*border-top-right-radius: 15px;*/
+  /*border-bottom-right-radius: 15px;*/
+  background: #fd746c;
+  background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
+  background: linear-gradient(to right, #ff9068, #fd746c);
 }
 
 .pending button {
-  background-color: #3d91e5;
-  color: #fff;
+  background-color: #fff;
+  color: #ccc;
   font-size: .8em;
-  border: 1px solid #3d91e5;
-  width: 12em;
+  border: 1px solid #ccc;
+  border-radius: 50%;
   padding: 5px;
   margin-right: 10px;
+  width: 2em;
 }
 
 .completed button {
-  background-color: #fff;
-  color: #3d91e5;
+  background-color: #3d91e5;
+  color: #fff;
   font-size: .8em;
-  border: 1px solid #3d91e5;
-  width: 12em;
+  border: 0px solid #3d91e5;
+  border-radius: 50%;
   padding: 5px;
   margin-right: 10px;
+  width: 2em;
+  background: #fd746c;
+  background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
+  background: linear-gradient(to right, #ff9068, #fd746c);
 }
-
-/*button .mark {
-  font-size: .8em;
-}*/
