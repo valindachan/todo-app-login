@@ -12,7 +12,8 @@ let todos2 = {
   todos2: [
     { id: 0, item: "Learn Node basics", status: "complete" },
     { id: 1, item: "Learn Express basics", status: "incomplete" },
-    { id: 2, item: "Learn HTML forms with Express", status: "incomplete" }
+    { id: 2, item: "Learn HTML forms with Express", status: "incomplete" },
+    { id: 3, item: "Learn to sing", status: "complete" }
   ]
 }
 
@@ -68,28 +69,45 @@ app.get("/todos2", function(req, res) {
   listByCompletion.complete = completedItems
   listByCompletion.incomplete = incompleteItems
 
-  console.log(todos)
-  console.log(listByCompletion)
-
   res.render("index", listByCompletion)
 })
 
+// app.post("/createTodo", function(req, res) {
+//   let newTodo = req.body.todo
+//   todos.incomplete.push(newTodo)
+//   res.redirect("/todos")
+// })
+
 app.post("/createTodo", function(req, res) {
   let newTodo = req.body.todo
-  todos.incomplete.push(newTodo)
-  res.redirect("/")
+  let id = todos2.todos2.length
+  todos2.todos2[id] = { id: id, item: newTodo, status: "incomplete" }
+  res.redirect("/todos2")
 })
 
-app.post("/markComplete/:completeTodo", function(req, res) {
-  let completeTodo = req.params.completeTodo
-  todos.complete.push(completeTodo)
-  res.redirect("/")
+// app.post("/markComplete/:completeTodo", function(req, res) {
+//   let completeTodo = req.params.completeTodo
+//   todos.complete.push(completeTodo)
+//   res.redirect("/")
+// })
+
+app.post("/markComplete/:id", function(req, res) {
+  let id = req.params.id
+  todos2.todos2[id].status = "complete"
+  res.redirect("/todos2")
 })
 
-app.post("/markIncomplete/:incompleteTodo", function(req, res) {
-  let incompleteTodo = req.params.incompleteTodo
-  todos.incomplete.push(incompleteTodo)
-  res.redirect("/")
+// SAVE THIS
+// app.post("/markIncomplete/:incompleteTodo", function(req, res) {
+//   let incompleteTodo = req.params.incompleteTodo
+//   todos.incomplete.push(incompleteTodo)
+//   res.redirect("/")
+// })
+
+app.post("/markIncomplete/:id", function(req, res) {
+  let id = req.params.id
+  todos2.todos2[id].status = "incomplete"
+  res.redirect("/todos2")
 })
 
 app.listen(3000, function() {

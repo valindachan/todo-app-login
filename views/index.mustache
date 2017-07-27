@@ -32,7 +32,7 @@
       <ul>
         {{#incomplete}}
           <li>
-            <form action="/markIncomplete/{{.}}" method="post">
+            <form action="/markComplete/{{id}}" method="post">
               <button type="submit">Mark as Complete</button> {{item}}
             </form>
           </li>
@@ -55,7 +55,7 @@
       <ul>
         {{#complete}}
           <li>
-            <form action="/markIncomplete/{{.}}" method="post">
+            <form action="/markIncomplete/{{id}}" method="post">
               <button type="submit">Mark as incomplete</button> <del>{{item}}</del>
             </form>
           </li>
