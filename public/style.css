@@ -1,0 +1,10 @@
+body {
+  font-family: Helvetica, sans-serif;
+  color: #53565a;
+  margin: 30px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
