@@ -8,32 +8,12 @@ const app = express()
 app.use(express.static("public"))
 
 //Test
-let todos2 = {
-  todos2: [
+let todos = {
+  todos: [
     { id: 0, item: "Learn Node basics", status: "complete" },
     { id: 1, item: "Learn Express basics", status: "incomplete" },
     { id: 2, item: "Learn HTML forms with Express", status: "incomplete" },
     { id: 3, item: "Learn to sing", status: "complete" }
-  ]
-}
-
-// !!!!!!
-// console.log(todos2.todos2[0])
-//
-// todos2.todos2[0].status = "incomplete"
-//
-// console.log(todos2.todos2[0])
-
-let todos = {
-  complete: [
-    "Learn to sing",
-    "Learn Express basics",
-    "Learn HTML forms with Express"
-  ],
-  incomplete: [
-    "Learn about authentification",
-    "Learn SQL",
-    "Learn how to create databases"
   ]
 }
 
@@ -51,15 +31,8 @@ app.set("views", "./views")
 app.set("view engine", "mustache")
 
 app.get("/", function(req, res) {
-  // Set 'action' to '/'
-  res.render("index", todos)
-})
-
-app.get("/todos2", function(req, res) {
-  let completedItems = todos2.todos2.filter(todo => todo.status === "complete")
-  let incompleteItems = todos2.todos2.filter(
-    todo => todo.status === "incomplete"
-  )
+  let completedItems = todos.todos.filter(todo => todo.status === "complete")
+  let incompleteItems = todos.todos.filter(todo => todo.status === "incomplete")
 
   let listByCompletion = {
     complete: [],
@@ -72,42 +45,27 @@ app.get("/todos2", function(req, res) {
   res.render("index", listByCompletion)
 })
 
-// app.post("/createTodo", function(req, res) {
-//   let newTodo = req.body.todo
-//   todos.incomplete.push(newTodo)
-//   res.redirect("/todos")
-// })
+app.get("/", function(req, res) {
+  res.render("index")
+})
 
 app.post("/createTodo", function(req, res) {
   let newTodo = req.body.todo
-  let id = todos2.todos2.length
-  todos2.todos2[id] = { id: id, item: newTodo, status: "incomplete" }
-  res.redirect("/todos2")
+  let id = todos.todos.length
+  todos.todos[id] = { id: id, item: newTodo, status: "incomplete" }
+  res.redirect("/")
 })
-
-// app.post("/markComplete/:completeTodo", function(req, res) {
-//   let completeTodo = req.params.completeTodo
-//   todos.complete.push(completeTodo)
-//   res.redirect("/")
-// })
 
 app.post("/markComplete/:id", function(req, res) {
   let id = req.params.id
-  todos2.todos2[id].status = "complete"
-  res.redirect("/todos2")
+  todos.todos[id].status = "complete"
+  res.redirect("/")
 })
-
-// SAVE THIS
-// app.post("/markIncomplete/:incompleteTodo", function(req, res) {
-//   let incompleteTodo = req.params.incompleteTodo
-//   todos.incomplete.push(incompleteTodo)
-//   res.redirect("/")
-// })
 
 app.post("/markIncomplete/:id", function(req, res) {
   let id = req.params.id
-  todos2.todos2[id].status = "incomplete"
-  res.redirect("/todos2")
+  todos.todos[id].status = "incomplete"
+  res.redirect("/")
 })
 
 app.listen(3000, function() {

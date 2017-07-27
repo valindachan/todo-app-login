@@ -18,17 +18,7 @@
       </form>
     </div>
     <div class="pending">
-      <!-- <h2>Pending</h2>
-        <ul>
-          {{#incomplete}}
-            <li>
-              <form action="/markComplete/{{.}}" method="post">
-                <button type="submit">Mark as complete</button> {{.}}
-              </form>
-            </li>
-          {{/incomplete}}
-        </ul> -->
-      <h3>Pending - Todo2 for testing</h3>
+      <h3>Todos</h3>
       <ul>
         {{#incomplete}}
           <li>
@@ -40,18 +30,7 @@
       </ul>
     </div>
     <div class="completed">
-      <!-- <h2>Completed</h2>
-        <ul>
-          {{#complete}}
-            <li>
-              <form action="/markIncomplete/{{.}}" method="post">
-                <button type="submit">Mark as incomplete</button> <del>{{.}}</del>
-              </form>
-            </li>
-          {{/complete}}
-        </ul> -->
-      <!--Displays all items in todos2 for testing purposes. Next step: need display only complete items-->
-      <h3>Complete - Todo2 for testing</h3>
+      <h3>Complete</h3>
       <ul>
         {{#complete}}
           <li>
