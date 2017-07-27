@@ -9,7 +9,7 @@
     <!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <div class="container">
+    <div class="create">
       <h1>To Do List</h1>
       <form action="/createTodo/{{todo}}" method="post">
         <p>Create a new todo</p>
@@ -17,8 +17,8 @@
         <button type="submit">Add Todo</button>
       </form>
     </div>
-    <div class="container">
-      <h2>Pending</h2>
+    <div class="pending">
+      <!-- <h2>Pending</h2>
         <ul>
           {{#incomplete}}
             <li>
@@ -27,10 +27,20 @@
               </form>
             </li>
           {{/incomplete}}
-        </ul>
+        </ul> -->
+      <h3>Pending - Todo2 for testing</h3>
+      <ul>
+        {{#incomplete}}
+          <li>
+            <form action="/markIncomplete/{{.}}" method="post">
+              <button type="submit">Mark as Complete</button> {{item}}
+            </form>
+          </li>
+        {{/incomplete}}
+      </ul>
     </div>
-    <div class="container">
-      <h2>Completed</h2>
+    <div class="completed">
+      <!-- <h2>Completed</h2>
         <ul>
           {{#complete}}
             <li>
@@ -39,7 +49,18 @@
               </form>
             </li>
           {{/complete}}
-        </ul>
+        </ul> -->
+      <!--Displays all items in todos2 for testing purposes. Next step: need display only complete items-->
+      <h3>Complete - Todo2 for testing</h3>
+      <ul>
+        {{#complete}}
+          <li>
+            <form action="/markIncomplete/{{.}}" method="post">
+              <button type="submit">Mark as incomplete</button> <del>{{item}}</del>
+            </form>
+          </li>
+        {{/complete}}
+      </ul>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

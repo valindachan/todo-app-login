@@ -7,18 +7,22 @@ const app = express()
 
 app.use(express.static("public"))
 
-// let todos = {
-//   complete: [
-//     { id: 0, item: "Learn Node basics" },
-//     { id: 1, item: "Learn Express basics" },
-//     { id: 2, item: "Learn HTML forms with Express" }
-//   ],
-//   incomplete: [
-//     { id: 3, item: "Learn about authentification" },
-//     { id: 4, item: "Learn SQL" },
-//     { id: 5, item: "Learn how to create databases" }
-//   ]
-// }
+//Test
+let todos2 = {
+  todos2: [
+    { id: 0, item: "Learn Node basics", status: "complete" },
+    { id: 1, item: "Learn Express basics", status: "incomplete" },
+    { id: 2, item: "Learn HTML forms with Express", status: "incomplete" }
+  ]
+}
+
+// !!!!!!
+// console.log(todos2.todos2[0])
+//
+// todos2.todos2[0].status = "incomplete"
+//
+// console.log(todos2.todos2[0])
+
 let todos = {
   complete: [
     "Learn to sing",
@@ -31,6 +35,7 @@ let todos = {
     "Learn how to create databases"
   ]
 }
+
 // Set app to use bodyParser()` middleware.
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -47,6 +52,26 @@ app.set("view engine", "mustache")
 app.get("/", function(req, res) {
   // Set 'action' to '/'
   res.render("index", todos)
+})
+
+app.get("/todos2", function(req, res) {
+  let completedItems = todos2.todos2.filter(todo => todo.status === "complete")
+  let incompleteItems = todos2.todos2.filter(
+    todo => todo.status === "incomplete"
+  )
+
+  let listByCompletion = {
+    complete: [],
+    incomplete: []
+  }
+
+  listByCompletion.complete = completedItems
+  listByCompletion.incomplete = incompleteItems
+
+  console.log(todos)
+  console.log(listByCompletion)
+
+  res.render("index", listByCompletion)
 })
 
 app.post("/createTodo", function(req, res) {
