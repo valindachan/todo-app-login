@@ -10,6 +10,16 @@ app.engine("mustache", mustacheExpress())
 app.set("views", "./views")
 app.set("view engine", "mustache")
 
+// Dummy data of todos
+let todos = {
+  todos: [
+    { id: 0, item: "Pick up dog food", status: "complete" },
+    { id: 1, item: "Paint the bathroom", status: "incomplete" },
+    { id: 2, item: "Go to Canada", status: "incomplete" },
+    { id: 3, item: "Check out new vegan burger place", status: "complete" }
+  ]
+}
+
 // Dummy list of user details for testing
 let users = {
   users: [
@@ -55,10 +65,26 @@ const authenticate = (req, res, next) => {
 }
 
 app.get("/login", function(req, res) {
-  res.render("login")
+  res.render("login", currentUser)
 })
 
 app.use(authenticate)
+app.get("/", function(req, res) {
+  let completedItems = todos.todos.filter(todo => todo.status === "complete")
+  let incompleteItems = todos.todos.filter(todo => todo.status === "incomplete")
+
+  let listByCompletion = {
+    complete: [],
+    incomplete: [],
+    currentUser: currentUser.currentUser[0].currentUser
+  }
+
+  listByCompletion.complete = completedItems
+  listByCompletion.incomplete = incompleteItems
+
+  res.render("index", listByCompletion)
+})
+
 app.get("/", function(req, res) {
   res.render("index", currentUser)
 })
