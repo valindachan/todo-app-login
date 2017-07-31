@@ -1,71 +1,66 @@
 const express = require("express")
-const bodyParser = require("body-parser")
-const expressValidator = require("express-validator")
 const mustacheExpress = require("mustache-express")
+const expressSession = require("express-session")
 
 const app = express()
 
 app.use(express.static("public"))
 
-//Test
-let todos = {
-  todos: [
-    { id: 0, item: "Learn Node basics", status: "complete" },
-    { id: 1, item: "Learn Express basics", status: "incomplete" },
-    { id: 2, item: "Learn HTML forms with Express", status: "incomplete" },
-    { id: 3, item: "Learn to sing", status: "complete" }
-  ]
-}
-
-// Set app to use bodyParser()` middleware.
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-//'extended: false' parses strings and arrays.
-//'extended: true' parses nested objects
-//'expressValidator' must come after 'bodyParser', since data must be parsed first!
-app.use(expressValidator())
-
 app.engine("mustache", mustacheExpress())
 app.set("views", "./views")
 app.set("view engine", "mustache")
 
-app.get("/", function(req, res) {
-  let completedItems = todos.todos.filter(todo => todo.status === "complete")
-  let incompleteItems = todos.todos.filter(todo => todo.status === "incomplete")
+// Dummy list of user details for testing
+let users = {
+  users: [
+    { id: 0, user_id: "username", password: "password1" },
+    { id: 1, user_id: "username2", password: "password2" }
+  ]
+}
 
-  let listByCompletion = {
-    complete: [],
-    incomplete: []
+// console.log(users)
+
+// Find another data structure to use but still know how to get this
+// to work with Mustache?
+let currentUser = { currentUser: [{ currentUser: "" }] }
+
+// const authenticate = (req, res, next) => {
+//   currentUser.currentUser[0].currentUser = req.query.user_id
+//
+//   console.log("hiiiiii")
+//
+//   for (var i = 0; i < users.users.length; i++) {
+//     if (currentUser.currentUser[0].currentUser === users.users[i].user_id) {
+//       console.log("yay")
+//       next()
+//     } else {
+//       res.redirect("/login")
+//     }
+//   }
+//
+//   // if (req.query.user_id === "username" && req.query.pw === "password") {
+//   //   next()
+//   // } else {
+//   //   res.redirect("/login")
+//   // }
+// }
+
+const authenticate = (req, res, next) => {
+  currentUser.currentUser[0].currentUser = req.query.user_id
+  if (req.query.user_id === "username" && req.query.pw === "password") {
+    next()
+  } else {
+    res.redirect("/login")
   }
+}
 
-  listByCompletion.complete = completedItems
-  listByCompletion.incomplete = incompleteItems
-
-  res.render("index", listByCompletion)
+app.get("/login", function(req, res) {
+  res.render("login")
 })
 
+app.use(authenticate)
 app.get("/", function(req, res) {
-  res.render("index")
-})
-
-app.post("/createTodo", function(req, res) {
-  let newTodo = req.body.todo
-  let id = todos.todos.length
-  todos.todos[id] = { id: id, item: newTodo, status: "incomplete" }
-  res.redirect("/")
-})
-
-app.post("/markComplete/:id", function(req, res) {
-  let id = req.params.id
-  todos.todos[id].status = "complete"
-  res.redirect("/")
-})
-
-app.post("/markIncomplete/:id", function(req, res) {
-  let id = req.params.id
-  todos.todos[id].status = "incomplete"
-  res.redirect("/")
+  res.render("index", currentUser)
 })
 
 app.listen(3000, function() {

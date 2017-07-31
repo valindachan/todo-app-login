@@ -48,11 +48,18 @@ li {
   padding: 20px;
   flex-grow: 2;
   border: 1px solid #ccc;
-  /*border-top-left-radius: 15px;*/
-  /*border-bottom-left-radius: 15px;*/
 }
 
-.create button {
+.login input {
+  font-size: 1em;
+  padding: 20px;
+  flex-grow: 2;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+}
+
+.create button,
+.login button {
   background-color: #0faa1c;
   color: #fff;
   padding: 20px;
@@ -60,8 +67,6 @@ li {
   border: 0px solid #0faa1c;
   margin: 0;
   flex-grow: 1;
-  /*border-top-right-radius: 15px;*/
-  /*border-bottom-right-radius: 15px;*/
   background: #fd746c;
   background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
   background: linear-gradient(to right, #ff9068, #fd746c);
@@ -90,4 +95,18 @@ li {
   background: #fd746c;
   background: -webkit-linear-gradient(to right, #ff9068, #fd746c);
   background: linear-gradient(to right, #ff9068, #fd746c);
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  opacity: .95;
+  padding: 30px;
+  margin: 20px;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
 }

@@ -10,7 +10,7 @@
   </head>
   <body>
     <div class="create">
-      <h1>To Do List</h1>
+      <h1>{{#currentUser}}{{currentUser}}{{/currentUser}}'s To Do List </h1>
       <form action="/createTodo/{{todo}}" method="post">
         <p>I need to...</p>
         <div class="create-todo-input">
