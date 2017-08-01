@@ -18,36 +18,16 @@ h2 {
   font-family: 'Slabo 27px', serif;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  padding: 5px;
-}
-
-.create,
-.pending,
-.completed {
+.welcome {
   background: #fff;
   opacity: .95;
   padding: 30px;
   margin: 20px;
 }
 
-.create-todo-input {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  max-width: 100vh;
-}
-
-.create input {
-  font-size: 1em;
-  padding: 20px;
-  flex-grow: 2;
-  border: 1px solid #ccc;
+blockquote {
+  border-left: 3px solid #53565a;
+  padding-left: 10px;
 }
 
 .login input {
@@ -58,7 +38,6 @@ li {
   border: 1px solid #ccc;
 }
 
-.create button,
 .login button {
   background-color: #0faa1c;
   color: #fff;
